@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Diskr</title>
+    <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules\datatables.net-bs4\css\dataTables.bootstrap4.css">
+    <style>
+      .top-buffer {
+        margin-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    <!-- Form -->  
+      <div class="row justify-content-center top-buffer">          
+        <input id="computerName" type="text" class="form-control form-control-lg" placeholder="Computer Name">
+      </div>
+      <div class="row justify-content-center top-buffer"> 
+      <button id="Get-Drives" class="btn btn-outline-info btn-block" type="button">Get Disk Info!</button>
+      <button id="Get-Process" class="btn btn-outline-info btn-block" type="button">Get Process Info!</button>
+      <button id="Get-UserInfo" class="btn btn-outline-info btn-block" type="button">Get User Info!</button>
+      </div>
+    <!-- Error -->
+    <div class="row justify-content-center top-buffer">
+      <div class="alert alert-danger" role="alert" style="display: block">
+          <strong>Whoops!</strong>
+          <div class="message"></div>
+      </div>
+    </div>
+      <!-- Output -->
+      <div class="row justify-content-center top-buffer">
+        <table id="output" class="table-sm table-striped rounded border border-info" cellspacing="0"></table>
+      </div>
+    </div>
+  </body>
+  <script>
+    require('./renderer.js')
+  </script>
+</html>
