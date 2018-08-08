@@ -4,8 +4,8 @@
 // Require Dependencies
 const $ = require("jquery");
 const powershell = require("node-powershell");
-const dt = require("datatables.net")();
-const dtbs = require("datatables.net-bs4")(window, $);
+const newtab = require("./newtab");
+const path = require("path");
 
 // Clear the Error Messages
 $(".alert-danger .message").html();
@@ -21,35 +21,20 @@ $("button").click(e => {
   });
 
   // Load the gun
-  ps.addCommand("./" + psscript);
+  let scriptPath = path.resolve(__dirname, "./" + psscript + ".ps1");
+  ps.addCommand(scriptPath);
 
   // Pull the Trigger
   ps.invoke()
     .then(output => {
-      let data = JSON.parse(output);
-      console.log("This is data", data);
+      let dataSet = JSON.parse(output);
       // Catch Custom Errors
-      if (data.Error) {
-        $(".alert-danger .message").html(data.Error.Message);
+      if (dataSet.Error) {
+        $(".alert-danger .message").html(dataSet.Error.Message);
         $(".alert-danger").show();
         return;
       }
-      // generate DataTables columns dynamically
-      let columns = [];
-      Object.keys(data[0]).forEach(key =>
-        columns.push({ title: key, data: key })
-      );
-      // empty table
-      $("#output").empty();
-      if ($.fn.dataTable.isDataTable("#output")) {
-        table.destroy();
-      }
-      table = $("#output").DataTable({
-        data: data,
-        columns: columns,
-        paging: true,
-        search: true
-      });
+      newtab(dataSet);
     })
     .catch(err => {
       console.error(err);

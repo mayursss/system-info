@@ -1,10 +1,11 @@
 {
-  "name": "electron-quick-start",
+  "name": "system-info",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "System Info App",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . --icon=icon.ico --out=dist --overwrite"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -17,7 +18,8 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^2.0.0"
+    "electron": "^2.0.0",
+    "electron-packager": "^12.1.0"
   },
   "dependencies": {
     "bootstrap": "^4.1.3",
